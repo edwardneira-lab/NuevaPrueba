@@ -37,26 +37,34 @@ function BenefitCard({ item, index }: { item: typeof benefits[number]; index: nu
   }, [])
 
   return (
-    <div ref={ref} className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+    <div
+      ref={ref}
+      className="group relative transition-all duration-700 ease-out"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(32px)",
+        transitionDelay: `${index * 80}ms`,
+      }}
+    >
       {/* Card */}
-      <div className="h-full bg-white border border-light-cyan/30 rounded-2xl p-6 hover:border-caribbean-green/50 hover:shadow-lg hover:shadow-caribbean-green/10 transition-all duration-300 group">
+      <div className="relative overflow-hidden rounded-2xl bg-oxford-blue p-6 sm:p-7 transition-all duration-300 hover:shadow-[0_0_40px_rgba(10,220,165,0.12)] hover:-translate-y-1 h-full">
         {/* Top accent line */}
-        <div className={`h-1 w-16 rounded-full bg-gradient-to-r ${item.accent} mb-6`} />
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-caribbean-green scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
         {/* Content row */}
-        <div className="flex items-start gap-4">
+        <div className="flex items-center gap-5">
           {/* Number + Icon */}
-          <div className="flex-shrink-0 space-y-2">
-            <div className="text-sm font-bold text-caribbean-green/40 group-hover:text-caribbean-green transition-colors">
+          <div className="relative flex-shrink-0">
+            <span className="absolute -top-3 -left-1 text-caribbean-green/[0.08] text-6xl font-black leading-none select-none">
               {String(index + 1).padStart(2, "0")}
-            </div>
-            <div className="w-12 h-12 rounded-xl bg-non-photo-blue/30 flex items-center justify-center group-hover:bg-caribbean-green/20 transition-colors">
-              <item.icon className="w-6 h-6 text-pine-green group-hover:text-caribbean-green transition-colors" />
+            </span>
+            <div className="relative w-14 h-14 rounded-2xl bg-caribbean-green/10 border border-caribbean-green/20 flex items-center justify-center group-hover:bg-caribbean-green group-hover:border-caribbean-green transition-all duration-300">
+              <item.icon className="h-6 w-6 text-caribbean-green group-hover:text-oxford-blue transition-colors duration-300" />
             </div>
           </div>
 
           {/* Title */}
-          <h3 className="text-lg font-bold text-oxford-blue leading-tight pt-2">
+          <h3 className="text-base sm:text-lg font-bold text-white leading-snug">
             {item.title}
           </h3>
         </div>
@@ -67,56 +75,57 @@ function BenefitCard({ item, index }: { item: typeof benefits[number]; index: nu
 
 export function ComoFunciona() {
   return (
-    <section id="beneficios" className="relative py-24 px-4 bg-gradient-to-b from-white to-non-photo-blue/30">
+    <section id="como-funciona" className="relative py-20 sm:py-28 bg-oxford-blue overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-caribbean-green/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-pine-green/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-caribbean-green/[0.03]" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-pine-green/[0.04] blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-caribbean-green/[0.04] blur-3xl" />
       </div>
 
-      <div className="container mx-auto max-w-7xl relative z-10">
+      <div className="relative max-w-6xl mx-auto px-6 sm:px-8">
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-oxford-blue font-serif">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-block text-caribbean-green text-xs sm:text-sm font-bold tracking-[0.2em] uppercase mb-4">
             Red de Inversionistas
-          </h2>
-          <p className="text-lg md:text-xl text-pine-green max-w-3xl mx-auto leading-relaxed">
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-0 text-balance leading-tight">
             {"¿Por qué invertir e incubar el Batch 2026 de Boostart?"}
-          </p>
+          </h2>
         </div>
 
         {/* Bento-style grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {/* First 3: top row on large screens */}
           {benefits.slice(0, 3).map((item, i) => (
             <BenefitCard key={i} item={item} index={i} />
           ))}
 
           {/* Middle 2: span to fill nicely */}
-          <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {benefits.slice(3, 5).map((item, i) => (
-              <BenefitCard key={i + 3} item={item} index={i + 3} />
-            ))}
+          <div className="sm:col-span-2 lg:col-span-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              {benefits.slice(3, 5).map((item, i) => (
+                <BenefitCard key={i + 3} item={item} index={i + 3} />
+              ))}
+            </div>
           </div>
 
           {/* 6th item */}
           <BenefitCard item={benefits[5]} index={5} />
 
           {/* 7th item: featured / full width */}
-          <div className="md:col-span-2 lg:col-span-2">
-            <div className="h-full bg-gradient-to-br from-oxford-blue to-pine-green border border-caribbean-green/30 rounded-2xl p-8 hover:border-caribbean-green hover:shadow-2xl hover:shadow-caribbean-green/20 transition-all duration-300 group relative overflow-hidden">
-              <div className="absolute inset-0 bg-caribbean-green/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 rounded-2xl bg-caribbean-green/20 flex items-center justify-center group-hover:bg-caribbean-green/30 transition-colors backdrop-blur-sm">
-                    <KeyRound className="w-8 h-8 text-caribbean-green" strokeWidth={2.5} />
-                  </div>
+          <div className="sm:col-span-2 lg:col-span-3">
+            <div
+              className="group relative overflow-hidden rounded-2xl bg-caribbean-green/[0.08] border border-caribbean-green/20 p-6 sm:p-8 transition-all duration-300 hover:bg-caribbean-green/[0.12] hover:border-caribbean-green/40"
+            >
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-caribbean-green" />
+              <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-8 justify-center text-center sm:text-left">
+                <div className="w-16 h-16 rounded-2xl bg-caribbean-green flex items-center justify-center flex-shrink-0">
+                  <KeyRound className="h-7 w-7 text-oxford-blue" />
                 </div>
-                <div className="flex-1 space-y-2">
-                  <span className="inline-block px-3 py-1 bg-caribbean-green/20 text-caribbean-green text-xs font-bold rounded-full">
-                    Exclusivo
-                  </span>
-                  <h3 className="text-2xl font-bold text-white leading-tight">
+                <div>
+                  <span className="text-caribbean-green text-xs font-bold tracking-[0.15em] uppercase">Exclusivo</span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white leading-snug mt-1">
                     Dealflow preferencial Boostart
                   </h3>
                 </div>

@@ -31,14 +31,14 @@ const phases = [
 
 export function Tesis() {
   return (
-    <section id="modelo" className="py-24 px-4 bg-white">
-      <div className="container mx-auto max-w-7xl">
+    <section id="tesis" className="py-16 sm:py-24 bg-oxford-blue overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-oxford-blue font-serif">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-balance">
             El modelo Boostart
           </h2>
-          <p className="text-lg md:text-xl text-pine-green max-w-3xl mx-auto leading-relaxed">
+          <p className="text-light-cyan text-base sm:text-lg lg:text-xl leading-relaxed">
             Combinamos tecnologia, marketing y banca de inversion para transformar ideas y proyectos
             en activos adquiribles en tres o cuatro anos.
           </p>
@@ -47,40 +47,40 @@ export function Tesis() {
         {/* Phases timeline */}
         <div className="relative">
           {/* Horizontal connector line (desktop) */}
-          <div className="hidden md:block absolute top-16 left-0 right-0 h-1 bg-gradient-to-r from-caribbean-green via-pine-green to-caribbean-green mx-auto w-[calc(100%-8rem)]" />
+          <div className="hidden md:block absolute top-[72px] left-[16.66%] right-[16.66%] h-0.5 bg-pine-green/40" />
 
           {/* Vertical connector line (mobile) */}
-          <div className="md:hidden absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-caribbean-green via-pine-green to-caribbean-green" />
+          <div className="md:hidden absolute top-0 bottom-0 left-8 w-0.5 bg-pine-green/40" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
             {phases.map((item, index) => (
-              <div key={index} className="relative flex md:flex-col items-start md:items-center gap-6 md:gap-0">
+              <div key={index} className="relative flex md:flex-col items-start md:items-center md:text-center px-4 sm:px-6 pb-12 md:pb-0">
                 {/* Phase number circle */}
-                <div className="relative z-10 flex-shrink-0">
-                  <div className="w-16 h-16 rounded-full bg-caribbean-green flex items-center justify-center">
-                    <item.icon className="w-8 h-8 text-oxford-blue" strokeWidth={2.5} />
+                <div className="relative z-10 flex-shrink-0 mr-6 md:mr-0 md:mb-8">
+                  <div className="w-16 h-16 rounded-full bg-caribbean-green flex items-center justify-center shadow-[0_0_24px_rgba(10,220,165,0.3)]">
+                    <item.icon className="h-7 w-7 text-oxford-blue" />
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 md:mt-8 md:text-center space-y-3">
+                <div className="flex-1 md:flex-initial">
                   {/* Phase label + duration */}
-                  <div className="space-y-1">
-                    <p className="text-sm font-bold text-caribbean-green uppercase tracking-wider">
+                  <div className="mb-3">
+                    <span className="inline-block text-caribbean-green text-xs font-bold tracking-widest uppercase mb-1">
                       {"Fase " + item.phase}
-                    </p>
-                    <p className="text-xs text-pine-green font-medium">
+                    </span>
+                    <div className="text-light-cyan/60 text-xs sm:text-sm font-mono">
                       {item.duration}
-                    </p>
+                    </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-bold text-oxford-blue font-serif">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-pine-green leading-relaxed">
+                  <p className="text-light-cyan/80 text-sm sm:text-base leading-relaxed max-w-xs md:mx-auto">
                     {item.description}
                   </p>
                 </div>
@@ -89,16 +89,23 @@ export function Tesis() {
           </div>
 
           {/* Progress bar */}
-          <div className="mt-16 space-y-4">
-            <div className="grid grid-cols-3 gap-4">
+          <div className="hidden md:block mt-14">
+            <div className="flex gap-2">
               {phases.map((item, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="h-3 rounded-full bg-caribbean-green/20 overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-caribbean-green to-pine-green rounded-full" style={{ width: '100%' }} />
-                  </div>
-                  <p className="text-xs text-center text-pine-green font-medium">
+                <div key={index} className="flex-1 flex flex-col items-center gap-2">
+                  <div
+                    className={
+                      "h-1.5 w-full rounded-full " +
+                      (index === 0
+                        ? "bg-caribbean-green"
+                        : index === 1
+                          ? "bg-caribbean-green/50"
+                          : "bg-pine-green/30")
+                    }
+                  />
+                  <span className="text-[11px] text-light-cyan/50 font-mono">
                     {item.duration}
-                  </p>
+                  </span>
                 </div>
               ))}
             </div>

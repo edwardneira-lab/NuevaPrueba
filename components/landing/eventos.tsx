@@ -129,158 +129,169 @@ export function Eventos() {
   }
 
   return (
-    <section id="eventos" className="py-24 px-4 bg-gradient-to-b from-non-photo-blue/30 to-white">
-      <div className="container mx-auto max-w-7xl">
+    <section id="eventos" className="py-20 sm:py-28 bg-oxford-blue">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-oxford-blue font-serif">
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+          <span className="inline-block text-caribbean-green text-xs sm:text-sm font-bold tracking-[0.2em] uppercase mb-4">
             Eventos Exclusivos
-          </h2>
-          <p className="text-xl text-pine-green font-semibold">
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 text-balance">
             {"Participa en nuestros próximos eventos"}
-          </p>
-          <p className="text-lg text-pine-green/80 max-w-3xl mx-auto leading-relaxed">
+          </h2>
+          <p className="text-light-cyan/70 text-base sm:text-lg leading-relaxed">
             {"Estamos realizando una serie de encuentros exclusivos para empresarios e inversionistas que deseen conocer nuestro Batch 2026."}
           </p>
         </div>
 
         {/* Event cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {eventos.map((evento, index) => (
-            <div key={index} className="group relative bg-white rounded-2xl overflow-hidden border border-light-cyan/30 hover:border-caribbean-green hover:shadow-xl hover:shadow-caribbean-green/10 transition-all duration-300">
+            <div
+              key={index}
+              className="group relative flex flex-col rounded-2xl overflow-hidden border border-pine-green/20 bg-[#0D1333] transition-all duration-300 hover:border-caribbean-green/40 hover:shadow-[0_0_32px_rgba(10,220,165,0.1)]"
+            >
               {/* City image */}
-              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-oxford-blue to-pine-green">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <MapPin className="w-16 h-16 text-caribbean-green/30" />
-                </div>
+              <div className="relative h-44 overflow-hidden">
+                <Image
+                  src={evento.imagen}
+                  alt={`Skyline de ${evento.ciudad}`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D1333] via-[#0D1333]/40 to-transparent" />
 
                 {/* Badge */}
-                <div className="absolute top-4 right-4 z-10">
-                  <div className="px-3 py-1 bg-caribbean-green/90 backdrop-blur-sm rounded-full">
-                    <p className="text-xs font-bold text-oxford-blue">Cupos Limitados</p>
-                  </div>
+                <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-[#0D1333]/80 backdrop-blur-sm border border-caribbean-green/40 rounded-full px-3 py-1">
+                  <Users className="h-3 w-3 text-caribbean-green" />
+                  <span className="text-caribbean-green text-[10px] font-bold tracking-wider uppercase">
+                    Cupos Limitados
+                  </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6 space-y-4">
+              <div className="flex flex-col flex-1 p-5">
                 {/* City + Country */}
-                <div className="flex items-center gap-2 text-pine-green">
+                <div className="flex items-center gap-2 mb-1">
                   {evento.tipo === "online" ? (
-                    <Monitor className="w-4 h-4 text-caribbean-green" />
+                    <Monitor className="h-4 w-4 text-caribbean-green flex-shrink-0" />
                   ) : (
-                    <MapPin className="w-4 h-4 text-caribbean-green" />
+                    <MapPin className="h-4 w-4 text-caribbean-green flex-shrink-0" />
                   )}
-                  <span className="font-semibold">{evento.ciudad}</span>
-                  <span className="text-sm">•</span>
-                  <span className="text-sm">{evento.pais}</span>
+                  <h3 className="text-xl font-bold text-white leading-tight">{evento.ciudad}</h3>
                 </div>
+                <span className="text-light-cyan/50 text-sm ml-6 mb-4">{evento.pais}</span>
 
                 {/* Date */}
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-caribbean-green" />
-                  <p className="text-sm font-semibold text-oxford-blue">
+                <div className="flex items-center gap-2 mb-1">
+                  <Calendar className="h-3.5 w-3.5 text-light-cyan/40 flex-shrink-0" />
+                  <span className="text-light-cyan/60 text-sm">
                     {[evento.fecha, evento.dia].filter(Boolean).join(" - ")}
-                  </p>
+                  </span>
                 </div>
 
                 {/* Hour */}
-                <p className="text-sm text-pine-green">
+                <span className={"text-light-cyan/50 text-xs ml-6 mb-5" + (evento.hora ? "" : " invisible")}>
                   {evento.hora || "\u00A0"}
-                </p>
+                </span>
 
                 {/* CTA Button */}
-                <div className="pt-2">
+                <div className="mt-auto">
                   {evento.link ? (
-                    <Button
-                      asChild
-                      className="w-full flex items-center justify-between gap-2 rounded-xl border border-caribbean-green bg-caribbean-green text-oxford-blue px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-caribbean-green/90 group/btn"
+                    <a
+                      href={evento.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-between gap-2 rounded-xl border border-caribbean-green text-caribbean-green px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-caribbean-green hover:text-oxford-blue group/btn"
                     >
-                      <a href={evento.link} target="_blank" rel="noopener noreferrer">
-                        Registro
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </a>
-                    </Button>
+                      <span>Registro</span>
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    </a>
                   ) : (
-                    <Button
+                    <button
                       onClick={() => setSelectedEvent(evento)}
                       className="w-full flex items-center justify-between gap-2 rounded-xl border border-caribbean-green text-caribbean-green px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-caribbean-green hover:text-oxford-blue group/btn"
                     >
-                      Registro
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
+                      <span>Registro</span>
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    </button>
                   )}
                 </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Event Registration Modal */}
-        <Dialog open={!!selectedEvent} onOpenChange={() => setSelectedEvent(null)}>
-          <DialogContent className="bg-white border-caribbean-green/30">
-            <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-oxford-blue">Registro para evento</DialogTitle>
-              <DialogDescription className="text-pine-green">
-                {selectedEvent?.titulo}
-              </DialogDescription>
-            </DialogHeader>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Label htmlFor="nombre" className="text-oxford-blue">Nombre completo</Label>
-                <Input
-                  id="nombre"
-                  value={formData.nombre}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                  required
-                  className="bg-oxford-blue border-pine-green/30 text-white placeholder:text-light-cyan/30 focus:border-caribbean-green"
-                />
-              </div>
-              <div>
-                <Label htmlFor="email" className="text-oxford-blue">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  className="bg-oxford-blue border-pine-green/30 text-white placeholder:text-light-cyan/30 focus:border-caribbean-green"
-                />
-              </div>
-              <div>
-                <Label htmlFor="ciudad" className="text-oxford-blue">Ciudad</Label>
-                <Input
-                  id="ciudad"
-                  value={formData.ciudad}
-                  onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
-                  required
-                  className="bg-oxford-blue border-pine-green/30 text-white placeholder:text-light-cyan/30 focus:border-caribbean-green"
-                />
-              </div>
-              <div>
-                <Label htmlFor="ticket" className="text-oxford-blue">{"Ticket estimado de inversión"}</Label>
-                <Select
-                  value={formData.ticket}
-                  onValueChange={(value) => setFormData({ ...formData, ticket: value })}
-                >
-                  <SelectTrigger className="bg-oxford-blue border-pine-green/30 text-white focus:border-caribbean-green">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="5-10k">{"USD 5k–10k"}</SelectItem>
-                    <SelectItem value="10-25k">{"USD 10k–25k"}</SelectItem>
-                    <SelectItem value="25-50k">{"USD 25k–50k"}</SelectItem>
-                    <SelectItem value="50k+">{"USD 50k+"}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button type="submit" className="w-full bg-caribbean-green text-oxford-blue hover:bg-caribbean-green/90 font-semibold">
-                Confirmar registro
-              </Button>
-            </form>
-          </DialogContent>
-        </Dialog>
       </div>
+
+      {/* Event Registration Modal */}
+      <Dialog open={!!selectedEvent} onOpenChange={() => setSelectedEvent(null)}>
+        <DialogContent className="sm:max-w-md bg-[#0D1333] border-pine-green/30">
+          <DialogHeader>
+            <DialogTitle className="text-white">Registro para evento</DialogTitle>
+            <DialogDescription className="text-light-cyan/60">
+              {selectedEvent?.titulo}
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="event-nombre" className="text-light-cyan/80">Nombre completo</Label>
+              <Input
+                id="event-nombre"
+                value={formData.nombre}
+                onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                required
+                className="bg-oxford-blue border-pine-green/30 text-white placeholder:text-light-cyan/30 focus:border-caribbean-green"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="event-email" className="text-light-cyan/80">Email</Label>
+              <Input
+                id="event-email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                className="bg-oxford-blue border-pine-green/30 text-white placeholder:text-light-cyan/30 focus:border-caribbean-green"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="event-ciudad" className="text-light-cyan/80">Ciudad</Label>
+              <Input
+                id="event-ciudad"
+                value={formData.ciudad}
+                onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
+                required
+                className="bg-oxford-blue border-pine-green/30 text-white placeholder:text-light-cyan/30 focus:border-caribbean-green"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="event-ticket" className="text-light-cyan/80">{"Ticket estimado de inversión"}</Label>
+              <Select
+                value={formData.ticket}
+                onValueChange={(value) => setFormData({ ...formData, ticket: value })}
+              >
+                <SelectTrigger className="bg-oxford-blue border-pine-green/30 text-white focus:border-caribbean-green">
+                  <SelectValue placeholder="Selecciona un rango" />
+                </SelectTrigger>
+                <SelectContent className="bg-oxford-blue border-pine-green/30">
+                  <SelectItem value="5k-10k">{"USD 5k\u201310k"}</SelectItem>
+                  <SelectItem value="10k-25k">{"USD 10k\u201325k"}</SelectItem>
+                  <SelectItem value="25k-50k">{"USD 25k\u201350k"}</SelectItem>
+                  <SelectItem value="50k+">{"USD 50k+"}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-caribbean-green text-oxford-blue hover:bg-caribbean-green/90 font-semibold"
+            >
+              Confirmar registro
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </section>
   )
 }
