@@ -1,3 +1,4 @@
+import { Navbar } from "@/components/landing/navbar"
 import { Hero } from "@/components/landing/hero"
 import { Tesis } from "@/components/landing/tesis"
 import { ComoFunciona } from "@/components/landing/como-funciona"
@@ -11,17 +12,20 @@ import { WhatsAppButton } from "@/components/landing/whatsapp-button"
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <Tesis />
-      <ComoFunciona />
-      <AngelHub />
-      <Eventos />
-      <Partners />
-      <Registro />
-      <FinalCTA />
-      <Footer />
-      <WhatsAppButton />
-    </main>
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <Tesis />
+        <ComoFunciona />
+        <AngelHub />
+        <Eventos />
+        <Partners />
+        <Registro />
+        <FinalCTA />
+        <Footer />
+        <WhatsAppButton />
+      </main>
+    </>
   )
 }
